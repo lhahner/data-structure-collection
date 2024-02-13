@@ -8,3 +8,6 @@ This is a personal collection to learn about data structure and how to implement
 | Stack (not dynamic)          | push, pop        |
 | Queue          | enqueue, dequeue |
 
+## Purpose
+I want to create my own code-base for Projects in the future.
+Also I want to learn more about stoarge allocation and pointers to get more knowledge about low-level programming lanugages
