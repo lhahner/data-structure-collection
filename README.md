@@ -23,7 +23,7 @@ Also I want to learn more about stoarge allocation and pointers to get more know
 2. insert
   1. increase tail and insert in array at position of tail
 
-## How to cook a queue
+### How to cook a queue
 1. head, tail, content and size needed
 2. insert
   1.  increase size and tail.
