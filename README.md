@@ -13,10 +13,22 @@ I want to create my own code-base for Projects in the future.
 Also I want to learn more about stoarge allocation and pointers to get more knowledge about low-level programming lanugages
 
 ## DS Cookbook
-### How to cook a linked list
-1. struct with value and next, next as type struct.
-2. insert
-   1. Iterate until next is null and set values by parameter.
+### How to cook a Linked-list
+#### Blueprint
+`struct { int value; Node* next };`
+`void push(struct Node* obj ,int data);`
+`void pop(struct Node* obj, int data);`
+
+#### Insert functionality
+Create a struct that can sture a value and has a pointer to the next Node.
+In the insert funtionality there should be the Node given that is the first
+Node of the list. Also the Parameter should provide the value that should be assigend.
+Now a temporaly variable is needed to store the frist Node of the list, provided by
+the paramter. Use a loop to iterate over the Nodes, initalize the temporally stored
+variable to store the next Node of the current Node.
+For the next Node of the current, that is null, memory allocation is needed.
+Allocate memory and set the value as given in the paramter. The next Node
+should then be null, since the variable is added at the end of the list.
   
 ### How to cook a stack
 1. array, tail and size value
@@ -25,11 +37,11 @@ Also I want to learn more about stoarge allocation and pointers to get more know
 
 ### How to cook a Queue
 #### Blueprint
-`int size, tail, head;
- int* content;`
+`int size, tail, head;`
+`int* content;`
 
- `void insert(int data);
-  void delelte();`
+ `void enqueue(int data);`
+ `void dequeue();`
 
 #### Insert functionality
 First increase the variable that stores the size of the list.
@@ -41,5 +53,7 @@ Now the value that should be added to the Array that stores the content
 can be added by referencing by tail.
 
 ### How to cook a binary search tree
+#### Blueprint
+#### Insert functionality
 
    
