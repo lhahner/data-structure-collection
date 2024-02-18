@@ -23,11 +23,23 @@ Also I want to learn more about stoarge allocation and pointers to get more know
 2. insert
   1. increase tail and insert in array at position of tail
 
-### How to cook a queue
-1. head, tail, content and size needed
-2. insert
-  1.  increase size and tail.
-  2.  safe current content in tmp
-  3.  realloc content
-  4.  add value to position at tail in array content
+### How to cook a Queue
+#### Blueprint
+`int size, tail, head;
+ int* content;`
+
+ `void insert(int data);
+  void delelte();`
+
+#### Insert functionality
+First increase the variable that stores the size of the list.
+Then increse the variable that stores the tail of the Queue.
+Safe the current content in a temporally allocated variable.
+Now Reallocate the Array that stores the content with the temporally
+allocated array, use size as the new definied size.
+Now the value that should be added to the Array that stores the content
+can be added by referencing by tail.
+
+### How to cook a binary search tree
+
    
