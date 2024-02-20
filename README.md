@@ -7,6 +7,8 @@ This is a personal collection to learn about data structure and how to implement
 | Linked List (not dynamic)    | add, delete      |
 | Stack (not dynamic)          | push, pop        |
 | Queue          | enqueue, dequeue |
+| Double Linked List | Insert, Delete |
+| Binary Search Tree | Insert, Delelte |
 
 ## Purpose
 I want to create my own code-base for Projects in the future.
@@ -54,6 +56,15 @@ can be added by referencing by tail.
 
 ### How to cook a binary search tree
 #### Blueprint
+`struct Node { int value; Node* left; Node* right; };`
 #### Insert functionality
 
-   
+### How to cook a double linked list
+#### Blueprint
+`struct Node { int value; Node* next; Node* prev; };`
+`insertBeginning(Node* head, int data);`
+`insertAfter(Node* before, int data);`
+`deleteAfter(Node* node);`
+`delteBeginnign();`
+
+#### Insert functionality
