@@ -2,9 +2,8 @@
 #include <stdio.h>
 
 #define SIZE 14
-int size = 0;
 
-void heapify();
+void heapify(int array[], int i);
 void swap(int *a, int *b);
 void print(int array[]);
 
@@ -12,27 +11,33 @@ void main()
 {
     int array[SIZE] = {13, 10, 8, 5, 32, 11, 3, 19, 22, 24, 8, 30, 31, 17};
     print(array);
+    // Build heap (rearrange array)
+    for (int i = SIZE; i >= 0; i--)
+    {
+        heapify(array, i);
+    }
     print(array);
 }
 
 // heapify by geeksforgeeks
-void heapify(int array[], int size, int i)
+void heapify(int array[], int i)
 {
     int largest = i;
     int l = 2 * i + 1;
     int r = 2 * i + 2;
-    if (l < size && array[l] > array[largest])
+    if (l < SIZE && array[l] > array[largest])
     {
         largest = l;
     }
-    if (r < size && array[r] > array[largest])
+    if (r < SIZE && array[r] > array[largest])
     {
         largest = r;
     }
+
     if (largest != i)
     {
         swap(&array[i], &array[largest]);
-        heapify(array, size, largest);
+        heapify(array, largest);
     }
 }
 
@@ -68,9 +73,10 @@ void print(int array[])
 }
 
 /**
- * @TODO Swap the largest element on top of the heap tree.
+ * @todo Swap the largest element on top of the heap tree.
+ * @deprecated Recursive version is more efficient.
  */
-void heapify(int array[])
+void ____heapify(int array[])
 {
     int *ptr;
     int split = (SIZE / 2) - 1;
