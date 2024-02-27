@@ -6,17 +6,16 @@
 void heapify(int array[], int i);
 void swap(int *a, int *b);
 void print(int array[]);
+void printArray(int arr[], int size);
 
 void main()
 {
     int array[SIZE] = {13, 10, 8, 5, 32, 11, 3, 19, 22, 24, 8, 30, 31, 17};
-    print(array);
-    // Build heap (rearrange array)
-    for (int i = SIZE; i >= 0; i--)
-    {
+    
+    for(int i = 0; i<SIZE; i++){
         heapify(array, i);
     }
-    print(array);
+    printArray(array, SIZE);
 }
 
 // heapify by geeksforgeeks
@@ -43,9 +42,9 @@ void heapify(int array[], int i)
 
 void swap(int *a, int *b)
 {
-    int *tmp = a;
+    int tmp = *a;
     *a = *b;
-    *b = *tmp;
+    *b = tmp;
 }
 
 void print(int array[])
@@ -102,4 +101,11 @@ void ____heapify(int array[])
             j++;
         }
     }
+}
+
+// Function to print the array, just for demonstration
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; ++i)
+        printf("%d ", arr[i]);
+    printf("\n");
 }
