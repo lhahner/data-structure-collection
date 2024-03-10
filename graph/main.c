@@ -13,12 +13,8 @@ bool add_edge(graph *g, unsigned int from_node, unsigned int to_node);
 int main()
 {
     graph *g1 = create_graph(5);
-    add_edge(g1, 0, 1);
     add_edge(g1, 0, 2);
-    add_edge(g1, 1, 2);
-
     print_graph(g1);
-    destroy_graph(g1);
 }
 
 struct mygraph
@@ -42,6 +38,7 @@ create_graph(int numnodes)
         free(g);
         return NULL;
     }
+
     for (int i = 0; i < g->numnodes; i++)
     {
         g->edges[i] = calloc(sizeof(bool), g->numnodes);
@@ -91,7 +88,10 @@ void print_graph(graph *g)
     {
         for (int to = 0; to < g->numnodes; to++)
         {
-            printf("%d -> %d", from, to);
+            if (g->edges[from][to])
+            {
+                printf("%d -> %d,\n", from, to);
+            }
         }
     }
     printf("}\n");
