@@ -68,3 +68,26 @@ can be added by referencing by tail.
 `delteBeginnign();`
 
 #### Insert functionality
+It needs do be diffierenciated between insert content at the beginning and insert content between and at the end.
+For the beginning we need two parameters, the content that should be inserted and the head pointer.
+The head Node can either be set globally or provided as a parameter of the `insertBeginning` function.
+
+##### Insert at the beginning
+If the list is NULL, we need to allocate new space in the memory in this function.
+Next we need to specify the different pointers of the struct. 
+Set the value to the value provided in the parameter. 
+Set the next Node to the provided head Node.
+Set the prev Node to NULL.
+If the head is not NULL and was set earlier in runtime, the prev Node for head should
+be the new Node which we allocated memory for. 
+Afterwards assign the new Node to the head Node.
+
+##### Insert inbetween or at the end
+For this function it is also necassary to get the previous Node of the Node we want to add.
+Now again allocate memory first. 
+Set the data of the allocated node to the provided data by the parameter.
+Set the next node the previous node to the newily allocated node.
+Basiclly copy all the pointer from the previouse Node and set them 
+to the Node we are allocating. If the next Node is not null also set the 
+previouse reference of the next Node to the new Node.
+
