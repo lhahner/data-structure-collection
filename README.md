@@ -56,8 +56,22 @@ can be added by referencing by tail.
 
 ### How to cook a binary search tree
 #### Blueprint
-`struct Node { int value; Node* left; Node* right; };`
+`struct Node { int value; Node* left; Node* right; };` \n
+`struct Node* createStructure(int x);`\n
+`struct Node* insertNode(struct Node* node, int x);`\n
+
 #### Insert functionality
+First we need to create the structure of the tree, which means
+the function `createStructure(int x);` should allocate memory and 
+set all the value that are listed in `struct Node`.
+In the function `insertNode` we need to specify if the node is either null,
+then we should create a structure again or it is not.
+If it is not null, we need to check if the root node which is provided as a 
+parameter is either larger or less than the root value.
+if it's larger we need to call the `insertNode()` function recursivly.
+So we can do the same for either the right or the left node of the root node,
+provided in the parameter.
+
 
 ### How to cook a double linked list
 #### Blueprint
