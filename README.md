@@ -18,7 +18,9 @@ Also I want to learn more about stoarge allocation and pointers to get more know
 ## How to cook a Linked-list
 ### Blueprint
 `struct { int value; Node* next };`
+
 `void push(struct Node* obj ,int data);`
+
 `void pop(struct Node* obj, int data);`
 
 ### Insert functionality
