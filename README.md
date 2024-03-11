@@ -33,16 +33,32 @@ Allocate memory and set the value as given in the paramter. The next Node
 should then be null, since the variable is added at the end of the list.
   
 ### How to cook a stack
-1. array, tail and size value
-2. insert
-  1. increase tail and insert in array at position of tail
+#### Blueprint
+`int top = -1;`
+
+`int *content;`
+
+`int size;`
+
+`int push(int x);`
+
+`int pop()`
+
+##### Insert functionality
+To insert a value in the stack, again memory needs to be allocated.
+The size should be specified in the allocation function.
+Increase the top counter by 1. And set the postion in the pointer of 
+content to the content provided by the parameter x.
+Return the inserted value.
 
 ### How to cook a Queue
 #### Blueprint
 `int size, tail, head;`
+
 `int* content;`
 
  `void enqueue(int data);`
+ 
  `void dequeue();`
 
 #### Insert functionality
@@ -56,9 +72,11 @@ can be added by referencing by tail.
 
 ### How to cook a binary search tree
 #### Blueprint
-`struct Node { int value; Node* left; Node* right; };` \n
-`struct Node* createStructure(int x);`\n
-`struct Node* insertNode(struct Node* node, int x);`\n
+`struct Node { int value; Node* left; Node* right; };` 
+
+`struct Node* createStructure(int x);`
+
+`struct Node* insertNode(struct Node* node, int x);`
 
 #### Insert functionality
 First we need to create the structure of the tree, which means
@@ -76,9 +94,13 @@ provided in the parameter.
 ### How to cook a double linked list
 #### Blueprint
 `struct Node { int value; Node* next; Node* prev; };`
+
 `insertBeginning(Node* head, int data);`
+
 `insertAfter(Node* before, int data);`
+
 `deleteAfter(Node* node);`
+
 `delteBeginnign();`
 
 #### Insert functionality
