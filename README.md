@@ -9,6 +9,9 @@ This is a personal collection to learn about data structure and how to implement
 | Queue          | enqueue, dequeue |
 | Double Linked List | Insert, Delete |
 | Binary Search Tree | Insert, Delelte |
+| Heap | Heapify |
+| Graph | Insert, Delete |
+
 
 # Purpose
 I want to create my own code-base for Projects in the future.
@@ -128,4 +131,15 @@ Set the next node the previous node to the newily allocated node.
 Basiclly copy all the pointer from the previouse Node and set them 
 to the Node we are allocating. If the next Node is not null also set the 
 previouse reference of the next Node to the new Node.
+
+## How to cook a heap
+### Blueprint
+`void heapify(int array[], int i);`
+
+`void swap(int *a, int *b);`
+
+`void print(int array[]);`
+
+### Insert functionality
+Not fully implemented yet.
 
