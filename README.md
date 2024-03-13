@@ -15,7 +15,22 @@ This is a personal collection to learn about data structure and how to implement
 
 # Purpose
 I want to create my own code-base for Projects in the future.
-Also I want to learn more about stoarge allocation and pointers to get more knowledge about low-level programming lanugages
+Also I want to learn more about stoarge allocation and pointers to get more knowledge about low-level programming lanugages.
+Furthermore the the process in implementing data structures should be simplified by giving examples as blueprints.
+
+# Basic Blueprint for Data Structures in C
+In C we need to allocate memory by ourself. This is something that is pretty strange for someone that has mostly Java expierence.
+Since we always need memory for all of our structures the procedure of allocating memory is the first requirement for implementing the data strucutre.
+Which leads to the overall best-practice blueprint. This best-practice blue will provide the basic functions a data-strucutre should cover and this 
+might also the frist step to go while implementing a specifc data-strucutre.
+
+`create(values, size);`
+
+`freeDs(values);`
+
+The create function should allocate memory for the variable that should contain the values. Be aware to specify a size.
+If it should be dynamiclly configured just create a global size variable and increase while adding values.
+The free function should either free memory of the whole data structure or for one item of the data strucutre.
 
 # Data Structure Cookbook
 ## How to cook a Linked-list
