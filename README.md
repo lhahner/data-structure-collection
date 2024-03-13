@@ -11,6 +11,7 @@ This is a personal collection to learn about data structure and how to implement
 | Binary Search Tree | Insert, Delelte |
 | Heap | Heapify |
 | Graph | Insert, Delete |
+| Hash table | Insert (not tested yet) |
 
 
 # Purpose
