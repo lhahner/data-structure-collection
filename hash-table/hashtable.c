@@ -201,3 +201,66 @@ void print_search(HashTable *table, char *key)
 /**
  * @todo: Create a Linked List for Chaining whenever a collison happens.
  ***/
+typedef struct Node
+{
+    Ht_item *value;
+    Node *next;
+
+} Node;
+
+int size = 0;
+
+Node *createLinkedList(Ht_item *item, Node *root)
+{
+    root = malloc(sizeof(Node) * size);
+    root->value = item;
+    root->next = NULL;
+    return root;
+}
+
+/**
+ * @todo test functionality
+ */
+Node *addNodeAtEnd(Ht_item *item, Node *node)
+{
+    if (item == NULL || node == NULL)
+    {
+        return NULL;
+    }
+
+    Node *tmp = node;
+    while (node->next != NULL)
+    {
+        tmp = tmp->next;
+    }
+
+    tmp->next = malloc(sizeof(Node));
+    tmp->next->value = item;
+    tmp->next->next = NULL;
+    return tmp;
+}
+
+/**
+ * @todo Not correct, rework!
+ */
+int *deleteLastNode(Node *root)
+{
+    if (root == NULL)
+    {
+        return 1;
+    }
+
+    while (root->next != NULL)
+    {
+        if (root->next->next == NULL)
+        {
+            break;
+        }
+        root = root->next;
+    }
+    free(root->value);
+    free(root->next);
+    root->next = NULL;
+    free(root);
+    return 0;
+}
