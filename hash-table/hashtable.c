@@ -18,6 +18,7 @@ typedef struct Ht_item
 typedef struct HashTable
 {
     Ht_item **items;
+    LinkedList **overflow_buckets;
     int size;
     int count;
 } HashTable;
@@ -63,7 +64,7 @@ HashTable *create_Hashtable(int size)
     {
         table->items[i] = NULL;
     }
-
+    table->overflow_buckets = create_overflow_buckets(table);
     return table;
 }
 
@@ -121,8 +122,24 @@ void print_table(HashTable *table)
 /**
  * @todo Collison handling in hashtable
  */
-void handle_collision(HashTable *table, Ht_item *item)
+void handle_collision(HashTable *table, unsigned long index, Ht_item *item)
 {
+    LinkedList *head = table->overflow_buckets[index];
+
+    if (head == NULL)
+    {
+        // Creates the list.
+        head = allocate_list();
+        head->item = item;
+        table->overflow_buckets[index] = head;
+        return;
+    }
+    else
+    {
+        // Insert to the list.
+        table->overflow_buckets[index] = linkedlist_insert(head, item);
+        return;
+    }
 }
 
 // Insert function for Hashtable
@@ -157,7 +174,7 @@ int ht_insert(HashTable *table, char *key, char *value)
         }
         else
         {
-            handle_collision(table, item);
+            handle_collision(table, index, item);
             return;
         }
     }
@@ -166,11 +183,76 @@ int ht_insert(HashTable *table, char *key, char *value)
     return 0;
 }
 
+void ht_delete(HashTable *table, char *key)
+{
+    // Deltes an item from the table.
+    int index = hash_function(key);
+    Ht_item *item = table->items[index];
+    LinkedList *head = table->overflow_buckets[index];
+
+    if (item == NULL)
+    {
+        // Does not exist
+        return;
+    }
+    else
+    {
+        if (head == NULL && strcmp(item->key, key) == 0)
+        {
+            table->items[index] = NULL;
+            free_item(item);
+            table->count--;
+            return;
+        }
+        else if (head != NULL)
+        {
+            if (strcmp(item->key, key) == 0)
+            {
+                free_item(item);
+                LinkedList *node = head;
+                head = head->next;
+                node->next = NULL;
+                table->items[index] = create_item(node->item->key, node->item->value);
+                free_linkedlist(node);
+                table->overflow_buckets[index] = head;
+                return;
+            }
+
+            LinkedList *curr = head;
+            LinkedList *prev = NULL;
+
+            while (curr)
+            {
+                if (strcmp(curr->item->key, key) == 0)
+                {
+                    if (prev == NULL)
+                    {
+                        free_linkedlist(head);
+                        table->overflow_buckets[index] = NULL;
+                        return;
+                    }
+                }
+                else
+                {
+                    prev->next = curr->next;
+                    curr->next = NULL;
+                    free_linkedlist(curr);
+                    table->overflow_buckets[index] = head;
+                    return;
+                }
+            }
+            curr = curr->next;
+            prev = curr;
+        }
+    }
+}
+
 // Search in Hashtable
 char *ht_search(HashTable *table, char *key)
 {
     int index = hash_function(key);
     Ht_item *item = table->items[index];
+    LinkedList *head = table->overflow_buckets[index];
 
     if (item != NULL)
     {
@@ -198,69 +280,114 @@ void print_search(HashTable *table, char *key)
     }
 }
 
+LinkedList **create_overflow_buckets(HashTable *table)
+{
+    // Create the overflow buckets; an array of LinkedLists.
+    LinkedList **buckets = (LinkedList **)calloc(table->size, sizeof(LinkedList *));
+
+    for (int i = 0; i < table->size; i++)
+        buckets[i] = NULL;
+
+    return buckets;
+}
+
+void free_overflow_buckets(HashTable *table)
+{
+    // Free all the overflow bucket lists.
+    LinkedList **buckets = table->overflow_buckets;
+
+    for (int i = 0; i < table->size; i++)
+        free_linkedlist(buckets[i]);
+
+    free(buckets);
+}
+
 /**
  * @todo: Create a Linked List for Chaining whenever a collison happens.
  ***/
-typedef struct Node
+// Defines the LinkedList.
+typedef struct LinkedList
 {
-    Ht_item *value;
-    Node *next;
+    Ht_item *item;
+    struct LinkedList *next;
+} LinkedList;
+;
 
-} Node;
-
-int size = 0;
-
-Node *createLinkedList(Ht_item *item, Node *root)
+LinkedList *allocate_list()
 {
-    root = malloc(sizeof(Node) * size);
-    root->value = item;
-    root->next = NULL;
-    return root;
+    // Allocates memory for a LinkedList pointer.
+    LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
+    return list;
 }
 
-/**
- * @todo test functionality
- */
-Node *addNodeAtEnd(Ht_item *item, Node *node)
+LinkedList *linkedlist_insert(LinkedList *list, Ht_item *item)
 {
-    if (item == NULL || node == NULL)
+    // Inserts the item onto the LinkedList.
+    if (!list)
     {
+        LinkedList *head = allocate_list();
+        head->item = item;
+        head->next = NULL;
+        list = head;
+        return list;
+    }
+    else if (list->next == NULL)
+    {
+        LinkedList *node = allocate_list();
+        node->item = item;
+        node->next = NULL;
+        list->next = node;
+        return list;
+    }
+
+    LinkedList *temp = list;
+
+    while (temp->next->next)
+    {
+        temp = temp->next;
+    }
+
+    LinkedList *node = allocate_list();
+    node->item = item;
+    node->next = NULL;
+    temp->next = node;
+    return list;
+}
+
+Ht_item *linkedlist_remove(LinkedList *list)
+{
+    // Removes the head from the LinkedList.
+    // Returns the item of the popped element.
+    if (!list)
         return NULL;
-    }
 
-    Node *tmp = node;
-    while (node->next != NULL)
-    {
-        tmp = tmp->next;
-    }
+    if (!list->next)
+        return NULL;
 
-    tmp->next = malloc(sizeof(Node));
-    tmp->next->value = item;
-    tmp->next->next = NULL;
-    return tmp;
+    LinkedList *node = list->next;
+    LinkedList *temp = list;
+    temp->next = NULL;
+    list = node;
+    Ht_item *it = NULL;
+    memcpy(temp->item, it, sizeof(Ht_item));
+    free(temp->item->key);
+    free(temp->item->value);
+    free(temp->item);
+    free(temp);
+    return it;
 }
 
-/**
- * @todo Not correct, rework!
- */
-int *deleteLastNode(Node *root)
+void free_linkedlist(LinkedList *list)
 {
-    if (root == NULL)
-    {
-        return 1;
-    }
+    LinkedList *temp = list;
 
-    while (root->next != NULL)
+    while (list)
     {
-        if (root->next->next == NULL)
-        {
-            break;
-        }
-        root = root->next;
+        temp = list;
+        list = list->next;
+        free(temp->item->key);
+        free(temp->item->value);
+        free(temp->item);
+        free(temp);
     }
-    free(root->value);
-    free(root->next);
-    root->next = NULL;
-    free(root);
-    return 0;
 }
