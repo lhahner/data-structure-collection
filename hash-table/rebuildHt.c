@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <math.h>
 
+int size = 0;
+
 typedef struct Hashitem
 {
     int key;
@@ -18,12 +20,15 @@ typedef struct Hashtable
 } Hashtable;
 
 int hashfunction(char *str);
-Hashtable *createHashtable(Hashtable *table, int size);
+Hashtable *createHashtable(Hashtable *table);
+void printList(Hashitem *list);
+Hashitem *insert(Hashtable *table, char *value);
 
 void main()
 {
     Hashtable *table;
-    createHashtable(table, 10);
+    table = insert(table, "Hello");
+    printList(table->list);
 }
 
 /**
@@ -39,11 +44,12 @@ int hashfunction(char *str)
     return k;
 }
 
-Hashtable *createHashtable(Hashtable *table, int size)
+Hashtable *createHashtable(Hashtable *table)
 {
     table = malloc(sizeof(Hashtable *));
     table->size = size;
-    table->list = calloc(0, size * sizeof(Hashitem));
+    table->list = malloc(size * sizeof(Hashitem));
+    printList(table->list);
     return table;
 }
 
@@ -51,8 +57,33 @@ int freeHashtable()
 {
 }
 
-Hashitem *insert()
+Hashitem *insert(Hashtable *table, char *value)
 {
+    if (table == NULL)
+    {
+        size++;
+        table = createHashtable(table);
+        table->list[0].value = value;
+        table->list[0].key = hashfunction(value);
+        return table;
+    }
+    else
+    {
+        int i = 0;
+        while (i < size)
+        {
+            if (table->list[i].value != NULL)
+            {
+                i++;
+            }
+            else
+            {
+                table->list[i].value = value;
+                table->list[i].key = hashfunction(value);
+                return table;
+            }
+        }
+    }
 }
 
 Hashitem *delete()
@@ -64,7 +95,12 @@ Hashitem *delete()
  */
 void printList(Hashitem *list)
 {
-    for (int i = 0; i < sizeof(list); i++)
+    for (int i = 0; i < size; i++)
     {
+        if (list[i].value == NULL)
+        {
+            return;
+        }
+        printf("%d: %s \n", list[i].key, list[i].value);
     }
 }
