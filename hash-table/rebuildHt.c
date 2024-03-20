@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int size = 0;
+int iterator = 0;
 
 typedef struct Hashitem
 {
@@ -20,14 +20,19 @@ typedef struct Hashtable
 } Hashtable;
 
 int hashfunction(char *str);
-Hashtable *createHashtable(Hashtable *table);
+Hashtable *createHashtable(int length);
 void printList(Hashitem *list);
-Hashitem *insert(Hashtable *table, char *value);
+void insert(Hashtable *table, char *value);
+char *get(Hashtable *table, int key);
 
 void main()
 {
-    Hashtable *table;
-    table = insert(table, "Hello");
+    Hashtable *table = createHashtable(5);
+    insert(table, "Hello");
+    insert(table, "Test");
+    insert(table, "Adding");
+    insert(table, "Multiple");
+    printf("Get: %s \n", get(table, hashfunction("Hello")));
     printList(table->list);
 }
 
@@ -44,11 +49,11 @@ int hashfunction(char *str)
     return k;
 }
 
-Hashtable *createHashtable(Hashtable *table)
+Hashtable *createHashtable(int length)
 {
-    table = malloc(sizeof(Hashtable *));
-    table->size = size;
-    table->list = malloc(size * sizeof(Hashitem));
+    Hashtable *table = malloc(sizeof(Hashtable *));
+    table->size = length;
+    table->list = malloc(length * sizeof(Hashitem));
     printList(table->list);
     return table;
 }
@@ -57,32 +62,29 @@ int freeHashtable()
 {
 }
 
-Hashitem *insert(Hashtable *table, char *value)
+void insert(Hashtable *table, char *value)
 {
-    if (table == NULL)
+    if (get(table, hashfunction(value)) != NULL)
     {
-        size++;
-        table = createHashtable(table);
-        table->list[0].value = value;
-        table->list[0].key = hashfunction(value);
-        return table;
+        //...Collision is happening
     }
     else
     {
-        int i = 0;
-        while (i < size)
-        {
-            if (table->list[i].value != NULL)
-            {
-                i++;
-            }
-            else
-            {
-                table->list[i].value = value;
-                table->list[i].key = hashfunction(value);
-                return table;
-            }
-        }
+        table->list[iterator].value = value;
+        table->list[iterator].key = hashfunction(value);
+        iterator++;
+        return;
+    }
+}
+
+char *get(Hashtable *table, int key)
+{
+    for (int i = 0; i < iterator; i++)
+    {
+        if (table->list[i].key == key)
+            return table->list[i].value;
+        else
+            return NULL;
     }
 }
 
@@ -95,7 +97,7 @@ Hashitem *delete()
  */
 void printList(Hashitem *list)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < iterator; i++)
     {
         if (list[i].value == NULL)
         {
