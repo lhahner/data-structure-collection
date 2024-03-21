@@ -9,13 +9,16 @@ typedef struct Node
 
 Node *createList();
 void insert(Node *head, char *value);
-char *delete();
+void delete();
 
 void main()
 {
     Node *head = createList();
     insert(head, "Lol");
     insert(head, "Dota");
+    insert(head, "Runner");
+
+    delete (head, "Lol");
 }
 
 Node *createList()
@@ -38,6 +41,24 @@ void insert(Node *head, char *value)
     return;
 }
 
-void delete()
+void delete(Node *head, char *value)
 {
+    if (head->next->value == value)
+    {
+        head->next = head->next->next;
+    }
+    else
+    {
+        Node *tmp = head;
+        while (tmp->next != NULL)
+        {
+            if (tmp->next->next->value == value)
+            {
+                tmp->next->next = tmp->next->next->next;
+                return;
+            }
+            tmp = tmp->next;
+        }
+        return;
+    }
 }
