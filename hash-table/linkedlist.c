@@ -1,25 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
-typedef struct Node
-{
-    char *value;
-    struct Node *next;
-} Node;
-
-Node *createList();
-void insert(Node *head, char *value);
-void delete();
-
-void main()
-{
-    Node *head = createList();
-    insert(head, "Lol");
-    insert(head, "Dota");
-    insert(head, "Runner");
-
-    delete (head, "Lol");
-}
+#include "linkedlist.h"
 
 Node *createList()
 {
@@ -41,7 +22,7 @@ void insert(Node *head, char *value)
     return;
 }
 
-void delete(Node *head, char *value)
+void deleteNode(Node *head, char *value)
 {
     if (head->next->value == value)
     {
