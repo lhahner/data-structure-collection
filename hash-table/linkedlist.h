@@ -1,5 +1,13 @@
+/**
+ * @author Lennart Hahner
+ * @date 21.03.2024
+ */
 #ifndef LINKEDLIST_H_
 #define LINKEDLIST_H_
+
+/**
+ * @todo the value of node should be defined in type Hashitem
+ */
 
 typedef struct Node
 {

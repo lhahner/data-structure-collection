@@ -1,6 +1,14 @@
+/**
+ * @author Lennart Hahner
+ * @date 21.03.2024
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "linkedlist.h"
+
+/**
+ * @todo the value of node should be defined in type Hashitem
+ */
 
 Node *createList()
 {

@@ -2,28 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-
-int iterator = 0;
-
-typedef struct Hashitem
-{
-    int key;
-    char *value;
-
-} Hashitem;
-
-typedef struct Hashtable
-{
-    int size;
-    Hashitem *list;
-
-} Hashtable;
-
-int hashfunction(char *str);
-Hashtable *createHashtable(int length);
-void printList(Hashitem *list);
-void insert(Hashtable *table, char *value);
-char *get(Hashtable *table, int key);
+#include "linkedlist.h"
+#include "rebuildHt.h"
 
 void main()
 {
@@ -66,7 +46,8 @@ void insert(Hashtable *table, char *value)
 {
     if (get(table, hashfunction(value)) != NULL)
     {
-        //...Collision is happening
+        Node *head = createList();
+        insert(head, value);
     }
     else
     {
