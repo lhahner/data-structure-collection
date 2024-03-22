@@ -5,6 +5,8 @@
 #include "linkedlist.h"
 #include "rebuildHt.h"
 
+int iterator = 0;
+
 void main()
 {
     Hashtable *table = createHashtable(5);
@@ -12,7 +14,8 @@ void main()
     insert(table, "Test");
     insert(table, "Adding");
     insert(table, "Multiple");
-    printf("Get: %s \n", get(table, hashfunction("Hello")));
+    insert(table, "Multiple");
+    insert(table, "Adding");
     printList(table->list);
 }
 
@@ -33,6 +36,7 @@ Hashtable *createHashtable(int length)
 {
     Hashtable *table = malloc(sizeof(Hashtable *));
     table->size = length;
+    table->head = NULL;
     table->list = malloc(length * sizeof(Hashitem));
     printList(table->list);
     return table;
@@ -44,10 +48,17 @@ int freeHashtable()
 
 void insert(Hashtable *table, char *value)
 {
+    
     if (get(table, hashfunction(value)) != NULL)
     {
-        Node *head = createList();
-        insert(head, value);
+        //creating linkedlist
+        if(table->head == NULL){
+            table->head = createList();
+            insertNode(table->head, value);
+        }
+        else {
+            insertNode(table->head, value);
+        }
     }
     else
     {
@@ -64,9 +75,8 @@ char *get(Hashtable *table, int key)
     {
         if (table->list[i].key == key)
             return table->list[i].value;
-        else
-            return NULL;
     }
+    return NULL;
 }
 
 Hashitem *delete()

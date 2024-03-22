@@ -1,7 +1,7 @@
 #ifndef REBUILDHT_H_
 #define REBUILDHT_H_
 
-int iterator = 0;
+#include "./linkedlist.h"
 
 typedef struct Hashitem
 {
@@ -13,6 +13,7 @@ typedef struct Hashitem
 typedef struct Hashtable
 {
     int size;
+    struct Node* head;
     Hashitem *list;
 
 } Hashtable;

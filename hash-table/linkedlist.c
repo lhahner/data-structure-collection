@@ -5,10 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "linkedlist.h"
-
-/**
- * @todo the value of node should be defined in type Hashitem
- */
+#include "rebuildHt.h"
 
 Node *createList()
 {
@@ -17,7 +14,7 @@ Node *createList()
     return node;
 }
 
-void insert(Node *head, char *value)
+void insertNode(Node *head, char *value)
 {
     Node *node = head;
     while (node->next != NULL)

@@ -5,18 +5,17 @@
 #ifndef LINKEDLIST_H_
 #define LINKEDLIST_H_
 
-/**
- * @todo the value of node should be defined in type Hashitem
- */
+#include "rebuildHt.h"
 
 typedef struct Node
 {
-    char *value;
+    char* value;
     struct Node *next;
 } Node;
 
 Node *createList();
-void insert(Node *head, char *value);
+void initInsert(char* value);
+void insertNode(Node *head, char *value);
 void deleteNode(Node *head, char *value);
 
 #endif
