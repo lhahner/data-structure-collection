@@ -16,6 +16,6 @@ typedef struct Node
 Node *createList();
 void initInsert(char* value);
 void insertNode(Node *head, char *value);
-void deleteNode(Node *head, char *value);
+Node* deleteNode(Node *head, char *value);
 
 #endif

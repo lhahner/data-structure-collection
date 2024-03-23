@@ -27,10 +27,12 @@ void insertNode(Node *head, char *value)
     return;
 }
 
-void deleteNode(Node *head, char *value)
+Node* deleteNode(Node *head, char *value)
 {
+    Node* delNode;
     if (head->next->value == value)
     {
+        delNode = head->next;
         head->next = head->next->next;
     }
     else
@@ -40,11 +42,12 @@ void deleteNode(Node *head, char *value)
         {
             if (tmp->next->next->value == value)
             {
+                delNode = tmp->next->next;
                 tmp->next->next = tmp->next->next->next;
-                return;
+                return delNode;
             }
             tmp = tmp->next;
         }
-        return;
+        return delNode;
     }
 }
