@@ -49,16 +49,27 @@ Hashtable *createHashtable(int length)
     return table;
 }
 
+Hashitem* createHashitem(){
+    Hashitem* item = malloc(sizeof(Hashitem*));
+    return item;
+}
+
 /**
  * @todo should free the memory of a selected hashitem.
 */
-int freeHashitem(Hashitem* item)
+Hashitem* freeHashitem(Hashitem* item)
 {
-  
-    item->key = 0;
-    item->value = 0;
-    iterator--;
-    return 0;
+     if (item == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        free(item->key);
+        free(item->value);
+        free(item);
+        return 0;
+    }
 }
 
 void insert(Hashtable *table, char *value)
@@ -76,8 +87,9 @@ void insert(Hashtable *table, char *value)
     }
     else
     {
-        table->list[iterator].value = value;
-        table->list[iterator].key = hashfunction(value);
+        table->list[iterator] = createHashitem();
+        table->list[iterator]->value = value;
+        table->list[iterator]->key = hashfunction(value);
         iterator++;
         return;
     }
@@ -87,8 +99,8 @@ char *getValue(Hashtable *table, int key)
 {
     for (int i = 0; i < iterator; i++)
     {
-        if (table->list[i].key == key)
-            return table->list[i].value;
+        if (table->list[i]->key == key)
+            return table->list[i]->value;
     }
     return NULL;
 }
@@ -96,8 +108,8 @@ char *getValue(Hashtable *table, int key)
 Hashitem* getItem(Hashtable *table, int key){
     for (int i = 0; i < iterator; i++)
     {
-        if (table->list[i].key == key)
-            return &(table->list[i]);
+        if (table->list[i]->key == key)
+            return table->list[i];
     }
     return NULL;
 }
@@ -109,12 +121,10 @@ Hashitem* getItem(Hashtable *table, int key){
  * to the hashtable if the item was moved to linkedlist
  * when inserted.
 */
-Hashitem *delete(Hashtable* table, char* value)
+int delete(Hashtable* table, char* value)
 {
-    Hashitem* itemToDelete = getItem(table, hashfunction(value));
-    freeHashitem(itemToDelete);
-    return itemToDelete;
-
+    freeHashitem(getItem(table, hashfunction(value)));
+    return 0;
 }
 
 /**
@@ -129,14 +139,14 @@ int moveToHashtable(Hashtable* table, Node* head, char* value){
 /**
  * @todo print item list hashtable
  */
-void printList(Hashitem *list)
+void printList(Hashitem **list)
 {
     for (int i = 0; i < iterator; i++)
     {
-        if (list[i].value == NULL)
+        if (list[i]->value == NULL)
         {
             return;
         }
-        printf("%d: %s \n", list[i].key, list[i].value);
+        printf("%d: %s \n", list[i]->key, list[i]->value);
     }
 }
