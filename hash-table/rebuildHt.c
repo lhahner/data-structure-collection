@@ -16,6 +16,7 @@ void main()
     insert(table, "Multiple");
     insert(table, "Multiple");
     delete(table, "Adding");
+    delete(table, "Hello");
     printList(table->list);
 }
 
@@ -51,6 +52,9 @@ Hashtable *createHashtable(int length)
 
 Hashitem* createHashitem(){
     Hashitem* item = malloc(sizeof(Hashitem*));
+    item->value = malloc(sizeof(char));
+    item->value = "test";
+    item->key = (int)malloc(sizeof(int));
     return item;
 }
 
@@ -65,8 +69,11 @@ Hashitem* freeHashitem(Hashitem* item)
     }
     else
     {
+        item->key = NULL;
+        item->value = NULL;
         free(item->key);
         free(item->value);
+        item = NULL;
         free(item);
         return 0;
     }
@@ -123,7 +130,20 @@ Hashitem* getItem(Hashtable *table, int key){
 */
 int delete(Hashtable* table, char* value)
 {
-    freeHashitem(getItem(table, hashfunction(value)));
+    int newLength = iterator-1;
+    Hashitem** newList = malloc(newLength * sizeof(Hashitem*));
+    int j = 0;
+    for(int i = 0; i<iterator; i++){
+        
+        if(strcmp(table->list[i]->value, value) == 0){
+                continue;
+        }
+        newList[j] = table->list[i];
+        j++;
+    }
+    iterator = newLength;
+    free(table->list);
+    table->list = newList;
     return 0;
 }
 

@@ -5,7 +5,7 @@
 
 typedef struct Hashitem
 {
-    int key;
+    int* key;
     char *value;
 
 } Hashitem;
@@ -25,7 +25,7 @@ void insert(Hashtable *table, char *value);
 char *getValue(Hashtable *table, int key);
 char* reverseHashfunction(int key);
 Hashitem* getItem(Hashtable *table, int key);
-Hashitem *delete(Hashtable* table, char* value);
+int delete(Hashtable* table, char* value);
 int moveToHashtable(Hashtable* table, struct Node* head, char* value);
 
 #endif
