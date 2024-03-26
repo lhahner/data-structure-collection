@@ -157,7 +157,12 @@ previouse reference of the next Node to the new Node.
 `void print(int array[]);`
 
 ### Insert functionality
-Not fully implemented yet.
+#### Heapify
+First create a heapify methode to make sure the rules for either a max-heap or a min-heap are correct.
+The heapify method should compare the number that should be added to the parent note. Done through dividing the index by 2.
+For example if it's a max heap swap whenever the child node is larger than the parent node.
+The 2Dimnesional heap structure as a tree is brought to 1Dimension by 2*i and 2*i+1, which means the elment next to the next and
+next to the next of the next.
 
 ## How to cook a Hashtable
 ### Blueprint
