@@ -159,3 +159,18 @@ previouse reference of the next Node to the new Node.
 ### Insert functionality
 Not fully implemented yet.
 
+## How to cook a Hashtable
+### Blueprint
+`struct Hashtable { Hashitem** list; };`
+
+`struct Hashitem { int key; char* value};`
+
+`Hashtable* createHashtable();`
+
+`void insert(Hashtable* table, char* value);`
+
+`void delete(Hashtable* table, char* value);`
+
+`char* get(Hashtable* table, int key);`
+### Insert functionality
+
