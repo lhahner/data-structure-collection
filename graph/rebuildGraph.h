@@ -1,6 +1,6 @@
 #ifndef REBUILD_GRAPH_
 #define REBUILD_GRAPH_
-#include <rebuildGraph.c>
+#include "rebuildGraph.c"
 
 graph *createGraph(int numnodes);
 void deleteGraph();
