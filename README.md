@@ -184,4 +184,4 @@ the related value. The value is inserted in the pointer list of the hashtable st
 
 # Literatur
 
-[Aho, Algorhitmen and Datastrucutes]{https://users.dcc.uchile.cl/~voyanede/cc4102/dS&A%20Book%20By%20Alfred%20-Aho.pdf}
+[Aho, Algorhitmen and Datastrucutes](https://users.dcc.uchile.cl/~voyanede/cc4102/dS&A%20Book%20By%20Alfred%20-Aho.pdf)
