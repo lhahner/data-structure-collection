@@ -12,6 +12,7 @@ This is a personal collection to learn about data structure and how to implement
 | Heap | Heapify |
 | Graph | Insert, Delete |
 | Hash table | Insert, delete |
+| Binary Heap Tree | insert(), not working |
 
 
 # Purpose
