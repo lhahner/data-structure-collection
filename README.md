@@ -187,6 +187,11 @@ the related value. The value is inserted in the pointer list of the hashtable st
 
 # Compiler Data Structures
 ## Syntax Tree
+A Syntax tree is a Data Strucutre widley used whenever handling language or other computional expressions.
+This tree is used to represent the code, which is the data in the case of a Syntax tree data strucutre. 
+The usage of synatx tree might be to get a semantic or syntacical understanding of either a source code of a certain language
+or an arithmetic expression. Since an arithmeitc expression is also a formal language I will consider the term expression as
+an overall representation of either arithemtic or formal expressions.
 AST tutorial: https://keleshev.com/abstract-syntax-tree-an-example-in-c/
 ## Parse Tree
 ## Symboltable
