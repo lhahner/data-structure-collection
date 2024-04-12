@@ -193,6 +193,7 @@ the related value. The value is inserted in the pointer list of the hashtable st
 `mkleaf(char* id, struct Entry entry);`
 
 `mkleaf(int val);`
+
 A Syntax tree is a Data Strucutre widley used whenever handling language or other computional expressions.
 This tree is used to represent the code, which is the data in the case of a Syntax tree data strucutre. 
 The usage of synatx tree might be to get a semantic or syntacical understanding of either a source code of a certain language
@@ -201,10 +202,9 @@ an overall representation of either arithemtic or formal expressions.
 AST tutorial: https://keleshev.com/abstract-syntax-tree-an-example-in-c/
 ## Parse Tree
 ## Symboltable
-## Gerichtete azyklische Graphen für Ausdrücke
-Ein GAG fpr einen Ausdruck identifziert die gemeinsamen Unterausdrücke in dem Ausdruck. 
-Der Unterschied zu einem Syntax Tree ist das ein Knoten in einem GAG, der einen gemeinsamen Unterausdruck repräsentiert,
-mehr als einen Vorgänger hat.
+## Directed Acyclic Graphs
+A DAG for an expression identifies the common subexpressions within the expression. 
+The difference from a syntax tree is that a node in a DAG representing a common subexpression has more than one predecessor.
 
 # Literatur
 Fundementail Literature:
