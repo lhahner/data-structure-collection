@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "ast-keleshev.h"
+#include <regex.h>
 
 struct AST
 {
@@ -18,17 +19,24 @@ struct Node
 int main()
 {
     AST *term = new_AST();
-    term->root = new_Node();
-
-    term->root->operation = ADD;
-
-    term->root->left = new_Node();
-    term->root->right = new_Node();
-    term->root->left->number = 2;
-    term->root->right->number = 2;
-
-    displayTree(term);
+    insert(term, "2+2");
     return 1;
+}
+
+AST *insert(AST *term, char *val)
+{
+    if (term == NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        if (isOperation(val) == 0)
+        {
+            printf("insert AST");
+            return term;
+        }
+    }
 }
 
 AST *new_AST()
@@ -65,4 +73,26 @@ char *printOperation(opr printOperation)
     default:
         return NULL;
     }
+}
+
+int isOperation(char *t)
+{
+    regmatch_t *__restrict__ pmatch;
+    regex_t reegex;
+    int isCompiled = regcomp(&reegex, "[+-/*]", 0);
+    if (isCompiled == 0)
+    {
+        int isMatch = regexec(&reegex, t, 0, NULL, 0);
+        if (isMatch == 0)
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        // error in Regex compilation
+        return 1;
+    }
+
+    return 0;
 }

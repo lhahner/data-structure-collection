@@ -12,4 +12,6 @@ AST *new_AST();
 Node *new_Node();
 void displayTree(AST *ast);
 char *printOperation(opr printOperation);
+int isOperation(char *t);
+AST *insert(AST *term, char *val);
 #endif
