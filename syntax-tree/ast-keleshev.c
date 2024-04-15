@@ -11,15 +11,18 @@ struct AST
 struct Node
 {
     int number;
-    opr operation;
+    char *operation;
     Node *left;
     Node *right;
 };
 
 int main()
 {
-    AST *term = new_AST();
-    insert(term, "2+2");
+    char *expr = "2+2";
+    for (int i = 0; i < sizeof(expr); i++)
+    {
+        AST *term = insert(term, (char)expr[i]);
+    }
     return 1;
 }
 
@@ -27,6 +30,21 @@ AST *insert(AST *term, char *val)
 {
     if (term == NULL)
     {
+        if (isOperation(val) == 0)
+        {
+            term = new_AST();
+            term->root = new_Node();
+            /**
+             * @todo adding the root element for an operation and
+             * adding a leaf element as roof
+             */
+            return term;
+        }
+        else
+        {
+            // return the tree if the first member was not an opeartion.
+            return NULL;
+        }
         return NULL;
     }
     else
@@ -53,12 +71,12 @@ Node *new_Node()
 
 void displayTree(AST *ast)
 {
-    printf(" %s \n", printOperation(ast->root->operation));
+    printf(" %s \n", getOperation(ast->root->operation));
     printf("\/   \\ \n");
     printf("%d   %d", ast->root->left->number, ast->root->right->number);
 }
 
-char *printOperation(opr printOperation)
+char *getOperation(opr printOperation)
 {
     switch (printOperation)
     {
