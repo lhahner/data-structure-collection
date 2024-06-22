@@ -202,6 +202,8 @@ or an arithmetic expression. Since an arithmeitc expression is also a formal lan
 an overall representation of either arithemtic or formal expressions.
 AST tutorial: https://keleshev.com/abstract-syntax-tree-an-example-in-c/
 ## Parse Tree
+## Abstract Syntax Tree
+## Annonated Parse Tree
 ## Symboltable
 ## Directed Acyclic Graphs
 A DAG for an expression identifies the common subexpressions within the expression. 
