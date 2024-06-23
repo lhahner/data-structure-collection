@@ -14,6 +14,11 @@ This is a personal collection to learn about data structure and how to implement
 | Graph | Insert, Delete |
 | Hash table | Insert, delete |
 | Binary Heap Tree | insert(), not working |
+| Syntax-Tree     | Not yet implemented |
+| Prase-Tree      | Not yet implemented |
+| Symboltable | Not yet implemented |
+| Directed Acyclic Graphs | Not yet implemented |
+
 
 
 # Purpose
