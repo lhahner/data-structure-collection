@@ -214,6 +214,9 @@ AST tutorial: https://keleshev.com/abstract-syntax-tree-an-example-in-c/
 A DAG for an expression identifies the common subexpressions within the expression. 
 The difference from a syntax tree is that a node in a DAG representing a common subexpression has more than one predecessor.
 
+# Operting System
+## Inodes
+
 # Literatur
 Fundementail Literature:
 [Aho, Algorhitmen and Datastrucutes](https://users.dcc.uchile.cl/~voyanede/cc4102/dS&A%20Book%20By%20Alfred%20-Aho.pdf)
