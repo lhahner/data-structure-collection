@@ -216,7 +216,7 @@ The difference from a syntax tree is that a node in a DAG representing a common 
 
 # Operting System
 ## Inodes
-
+## Linux Memory Killer Alogrhitem
 # Literatur
 Fundementail Literature:
 [Aho, Algorhitmen and Datastrucutes](https://users.dcc.uchile.cl/~voyanede/cc4102/dS&A%20Book%20By%20Alfred%20-Aho.pdf)
