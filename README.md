@@ -212,6 +212,7 @@ AST tutorial: https://keleshev.com/abstract-syntax-tree-an-example-in-c/
 ## Symboltable
 ## Directed Acyclic Graphs
 ## Primenumber
+## LR-Parser-Algorithm
 A DAG for an expression identifies the common subexpressions within the expression. 
 The difference from a syntax tree is that a node in a DAG representing a common subexpression has more than one predecessor.
 
